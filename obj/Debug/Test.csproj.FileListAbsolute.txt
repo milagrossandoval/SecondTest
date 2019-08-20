@@ -18,3 +18,6 @@ C:\Users\milagros.sandoval\Desktop\Test\bin\Debug\WebDriver.Support.xml
 C:\Users\milagros.sandoval\Desktop\Test\bin\Debug\nunit.framework.dll
 C:\Users\milagros.sandoval\Desktop\Test\bin\Debug\nunit.framework.pdb
 C:\Users\milagros.sandoval\Desktop\Test\bin\Debug\nunit.framework.xml
+C:\Users\milagros.sandoval\Desktop\Test\bin\Debug\RestSharp.dll
+C:\Users\milagros.sandoval\Desktop\Test\bin\Debug\RestSharp.xml
+C:\Users\milagros.sandoval\Desktop\Test\obj\Debug\Test.csprojAssemblyReference.cache
