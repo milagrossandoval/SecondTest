@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Gauge.CSharp.Lib;
 using Gauge.CSharp.Lib.Attribute;
+using NUnit.Framework;
 using RestSharp;
 using Test.Test.page.entidades;
 
@@ -12,17 +13,20 @@ namespace Test
 {
     public class ApiAutomated
     {
-        [Step("Get country <code>")]
+        [Step("Get country for <code>")]
         public void GetEachCountry(string code)
         {
             var client = new RestClient();
             var request = new RestRequest("https://restcountries.eu/rest/v2/alpha/{code}", Method.GET);
             request.AddUrlSegment("code", code);
-            client.Execute(request);
+            var response = client.Execute(request);
+            Console.WriteLine(response.StatusCode);
+            Console.WriteLine(response.Content);
+            Assert.That(response.Content.Trim(), Is.Not.EqualTo("{'status':404,'message':'Not Found'}"));
         }
 
 
-        [Step("Add country")]
+        [Step("Add country <table>")]
         public void Add(Table table)
         {
             var tableRows = table.GetTableRows();
@@ -37,7 +41,7 @@ namespace Test
                 alpha3_code = row.GetCell("alpha3_code")
                 });
             }
-                
+            Assert.That(request,Is.Not.Null);
 
             client.Execute(request);
 

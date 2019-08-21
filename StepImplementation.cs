@@ -15,7 +15,6 @@ namespace Test
     public class StepImplementation
     {
         private IWebDriver driver = null;
-        private string urlInicial = "http://automationpractice.com/index.php?";
         private CreateAccountPage createAccountPage;
 
 
@@ -23,37 +22,33 @@ namespace Test
         public void NavigateTo(string url)
         {
             driver = new ChromeDriver();
-            createAccountPage = new CreateAccountPage("chrome", urlInicial, false);
+            createAccountPage = new CreateAccountPage("chrome", url, false);
         }
-
-
 
         [Step("Sign up a new user")]
         public void Register()
         {
-            Account cuenta = new Account();
-            cuenta.Email = "msandoval24" +
-                "@cignium.com";
-            cuenta.FirstName = "Tatiana";
-            cuenta.LastName = "Sandoval";
-            cuenta.Password = "abcdABCD1234";
-            cuenta.Address = "Arbol #3";
-            cuenta.CodigoPostal = "00000";
-            cuenta.Alias = "Ninguna";
-            cuenta.Country = "United States";
-            cuenta.State = "Alaska";
-            cuenta.City = "Lima";
-            cuenta.Phone = "15184851";
+            GenerateRandom generateRandom = new GenerateRandom();
+            Account account = new Account();
+            account.Email = generateRandom.RandomEmail();
+            account.FirstName = generateRandom.RandomName();
+            account.LastName = "Sandoval";
+            account.Password = generateRandom.RandomPassword();
+            account.Address = generateRandom.RandomString(6, false);
+            account.CodigoPostal = "00000";
+            account.Alias = "Ninguna";
+            account.Country = "United States";
+            account.State = generateRandom.RandomState();
+            account.City = "Lima";
+            account.Phone = generateRandom.RandomPhone(9);
 
-            var resultado = createAccountPage.Crear(cuenta);
-            String nombre = resultado.Item1;
-            String urlEsperada = "?controller=my-account";
-            String urlObtenida = resultado.Item2;
-            Assert.AreEqual(cuenta.FirstName + " " + cuenta.LastName, nombre);
-            Assert.IsTrue(urlObtenida.Contains(urlEsperada));
-            Assert.IsTrue(resultado.Item3);
+            var result = createAccountPage.Create(account);
+            String name = result.Item1;
+            String expectedURL = "?controller=my-account";
+            String obtainURL = result.Item2;
+            Assert.AreEqual(account.FirstName + " " + account.LastName, name);
+            Assert.IsTrue(obtainURL.Contains(expectedURL));
+            Assert.IsTrue(result.Item3);
         }   
-
-
     }
 }

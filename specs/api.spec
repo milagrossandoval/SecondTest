@@ -6,7 +6,6 @@ Get country
 -------
 
 * Get country for "US"
-* Validate the response
 
 
 Add country

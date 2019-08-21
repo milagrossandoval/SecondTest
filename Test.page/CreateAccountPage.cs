@@ -36,25 +36,25 @@ namespace Test.Test.page
             this.driver.Url = urlInicial;
         }
 
-        public Tuple<string, string, bool> Crear(Account cuenta)
+        public Tuple<string, string, bool> Create(Account account)
         {
             bool rpta = false;
             driver.FindElement(btnSign).Click();
-            driver.FindElement(txtEmail).SendKeys(cuenta.Email);
+            driver.FindElement(txtEmail).SendKeys(account.Email);
             driver.FindElement(btnSubmit).Click();
             Thread.Sleep(2000);
-            driver.FindElement(txtFirstName).SendKeys(cuenta.FirstName);
-            driver.FindElement(txtLastName).SendKeys(cuenta.LastName);
-            driver.FindElement(txtPass).SendKeys(cuenta.Password);
-            driver.FindElement(txtAddress).SendKeys(cuenta.Address);
-            driver.FindElement(txtCity).SendKeys(cuenta.City);
+            driver.FindElement(txtFirstName).SendKeys(account.FirstName);
+            driver.FindElement(txtLastName).SendKeys(account.LastName);
+            driver.FindElement(txtPass).SendKeys(account.Password);
+            driver.FindElement(txtAddress).SendKeys(account.Address);
+            driver.FindElement(txtCity).SendKeys(account.City);
             var cboState = new SelectElement(driver.FindElement(By.Id("id_state")));
-            cboState.SelectByText(cuenta.State);
-            driver.FindElement(txtPostal).SendKeys(cuenta.CodigoPostal);
+            cboState.SelectByText(account.State);
+            driver.FindElement(txtPostal).SendKeys(account.CodigoPostal);
             var cboCountry = new SelectElement(driver.FindElement(By.Id("id_country")));
-            cboCountry.SelectByText(cuenta.Country);
-            driver.FindElement(txtPhone).SendKeys(cuenta.Phone);
-            driver.FindElement(txtAlias).SendKeys(cuenta.Alias);
+            cboCountry.SelectByText(account.Country);
+            driver.FindElement(txtPhone).SendKeys(account.Phone);
+            driver.FindElement(txtAlias).SendKeys(account.Alias);
             driver.FindElement(btnSubmitAccount).Click();
             var nameAccount = driver.FindElement(headerName).Text;
             string urlObtenida = driver.Url;
