@@ -5,7 +5,7 @@
 Get country
 -------
 
-* Get country for "GB"
+* Get country for "US"
 
 
 Add country

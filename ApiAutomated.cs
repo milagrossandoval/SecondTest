@@ -41,9 +41,10 @@ namespace Test
                 alpha3_code = row.GetCell("alpha3_code")
                 });
             }
-            Assert.That(request,Is.Not.Null);
+            //Assert.That(request,Is.Not.Null);
+            var response = client.Execute(request);
+            Assert.That(response.StatusCode.ToString().Trim(), Is.EqualTo("NotFound"));
 
-            client.Execute(request);
 
         }
     }
