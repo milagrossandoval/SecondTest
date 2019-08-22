@@ -18,7 +18,7 @@ namespace Test
         private IWebDriver driver = null;
         private CreateAccount createAccount;
         private Account account = new Account();
-        string expectedURL = "?controller=my-account";
+        string expectedURL = "?controller=my-account1";
         string name;        
         string obtainURL;
         bool boolLogOut;

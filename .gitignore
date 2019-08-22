@@ -2,6 +2,10 @@
 .vs/
 .debug.txt
 
+# User-specific files
+*.suo
+*.ide-wal
+
 #NuGet Packages
 **/[Pp]ackages/*
 
