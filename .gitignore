@@ -1,5 +1,6 @@
 # Visual Studio
 .vs/
+.debug.txt
 
 #NuGet Packages
 **/[Pp]ackages/*
