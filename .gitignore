@@ -1,6 +1,9 @@
 # Visual Studio
 .vs/
 
+#NuGet Packages
+**/[Pp]ackages/*
+
 # Gauge - metadata dir
 .gauge
 
