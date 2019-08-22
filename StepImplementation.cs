@@ -32,9 +32,9 @@ namespace Test
             Account account = new Account();
             account.Email = generateRandom.RandomEmail();
             account.FirstName = generateRandom.RandomName();
-            account.LastName = "Sandoval";
-            account.Password = generateRandom.RandomPassword();
-            account.Address = generateRandom.RandomString(6, false);
+            account.LastName = generateRandom.RandomLastName();
+            account.Password = GenerateRandom.RandomPassword();
+            account.Address = GenerateRandom.RandomString(6, false);
             account.CodigoPostal = "00000";
             account.Alias = "Ninguna";
             account.Country = "United States";

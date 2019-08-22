@@ -20,9 +20,9 @@ namespace Test
             var request = new RestRequest("https://restcountries.eu/rest/v2/alpha/{code}", Method.GET);
             request.AddUrlSegment("code", code);
             var response = client.Execute(request);
-            Console.WriteLine(response.StatusCode);
+            Console.WriteLine(response.StatusCode.ToString().Trim());
             Console.WriteLine(response.Content);
-            Assert.That(response.Content.Trim(), Is.Not.EqualTo("{'status':404,'message':'Not Found'}"));
+            Assert.That(response.StatusCode.ToString().Trim(), Is.Not.EqualTo("NotFound"));
         }
 
 
