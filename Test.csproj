@@ -51,6 +51,9 @@
     <Reference Include="RestSharp, Version=106.6.10.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
       <HintPath>packages\RestSharp.106.6.10\lib\net452\RestSharp.dll</HintPath>
     </Reference>
+    <Reference Include="SeleniumExtras.WaitHelpers, Version=3.11.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetSeleniumExtras.WaitHelpers.3.11.0\lib\net45\SeleniumExtras.WaitHelpers.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -68,20 +71,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiAutomated.cs" />
-    <Compile Include="StepImplementation.cs" />
+    <Compile Include="Implementation\API.cs" />
+    <Compile Include="Implementation\Account.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Test.driver\Driver.cs" />
-    <Compile Include="Test.page.entidades\Account.cs" />
-    <Compile Include="Test.page.entidades\GenerateRandom.cs" />
-    <Compile Include="Test.page.entidades\TestObject.cs" />
-    <Compile Include="Test.page\CreateAccountPage.cs" />
+    <Compile Include="Driver\Driver.cs" />
+    <Compile Include="Entities\Account.cs" />
+    <Compile Include="Util\GenerateRandom.cs" />
+    <Compile Include="Entities\Country.cs" />
+    <Compile Include="Model\CreateAccount.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="env\default\default.properties" />
     <None Include="manifest.json" />
-    <None Include="specs\api.spec" />
-    <None Include="specs\example.spec" />
+    <None Include="Specs\API\API.spec" />
+    <None Include="Specs\Account\CreateAccount.spec" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

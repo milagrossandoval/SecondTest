@@ -19,3 +19,4 @@ C:\Users\milagros.sandoval\Desktop\Test\gauge_bin\WebDriver.xml
 C:\Users\milagros.sandoval\Desktop\Test\gauge_bin\WebDriver.Support.xml
 C:\Users\milagros.sandoval\Desktop\Test\gauge_bin\RestSharp.dll
 C:\Users\milagros.sandoval\Desktop\Test\gauge_bin\RestSharp.xml
+C:\Users\milagros.sandoval\Desktop\Test\gauge_bin\SeleniumExtras.WaitHelpers.dll

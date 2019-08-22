@@ -7,13 +7,14 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Test.Test.driver;
-using Test.Test.page.entidades;
+using Test.Test.Entities;
 
-namespace Test.Test.page
+namespace Test.Test.Model
 {
-    public class CreateAccountPage
+    public class CreateAccount
     {
         private IWebDriver driver = null;
+        private bool b = false;
         private readonly By btnSign = By.LinkText("Sign in");
         private readonly By txtEmail = By.Id("email_create");
         private readonly By btnSubmit = By.Id("SubmitCreate");
@@ -30,19 +31,24 @@ namespace Test.Test.page
         private readonly By btnLogout = By.ClassName("logout");
 
 
-        public CreateAccountPage(String navegador, String urlInicial, bool remoto)
+        public CreateAccount(string browser, string url, bool remote)
         {
-            this.driver = Driver.InicializarDriver(navegador, remoto);
-            this.driver.Url = urlInicial;
+            driver = Driver.InitializeDriver(browser, remote);
+            driver.Url = url;
+        }
+
+        public void SignIn()
+        {
+            driver.FindElement(btnSign).Click();
         }
 
         public Tuple<string, string, bool> Create(Account account)
         {
-            bool rpta = false;
-            driver.FindElement(btnSign).Click();
+            var wait = new WebDriverWait(driver,TimeSpan.FromSeconds(60));               
             driver.FindElement(txtEmail).SendKeys(account.Email);
             driver.FindElement(btnSubmit).Click();
-            Thread.Sleep(2000);
+            //Thread.Sleep(2000);
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(txtFirstName));            
             driver.FindElement(txtFirstName).SendKeys(account.FirstName);
             driver.FindElement(txtLastName).SendKeys(account.LastName);
             driver.FindElement(txtPass).SendKeys(account.Password);
@@ -50,7 +56,7 @@ namespace Test.Test.page
             driver.FindElement(txtCity).SendKeys(account.City);
             var cboState = new SelectElement(driver.FindElement(By.Id("id_state")));
             cboState.SelectByText(account.State);
-            driver.FindElement(txtPostal).SendKeys(account.CodigoPostal);
+            driver.FindElement(txtPostal).SendKeys(account.PostalCode);
             var cboCountry = new SelectElement(driver.FindElement(By.Id("id_country")));
             cboCountry.SelectByText(account.Country);
             driver.FindElement(txtPhone).SendKeys(account.Phone);
@@ -58,16 +64,24 @@ namespace Test.Test.page
             driver.FindElement(btnSubmitAccount).Click();
             var nameAccount = driver.FindElement(headerName).Text;
             string urlObtenida = driver.Url;
-            if (driver.FindElement(btnLogout).Displayed)
-            {
-                rpta = true;
-            }
-            return Tuple.Create(nameAccount, urlObtenida, rpta);
+            b = validateLogout();
+            return Tuple.Create(nameAccount, urlObtenida, b);
         }
 
-        public void CerrarPagina()
+        public bool validateLogout()
         {
-            Driver.CerrarPagina(driver);
+            if (driver.FindElement(btnLogout).Displayed)
+            {
+               b = true;
+            }
+
+            return b;
+        }
+
+
+        public void ClosePage()
+        {
+            Driver.ClosePage(driver);
         }
 
     }

@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Test.Test.page.entidades
+namespace Test.Test.Util
 {
     public class GenerateRandom
     {
         private readonly static Random r = new Random();
-        public List<String> Domains { get; set; }
-        public List<String> Extensions { get; set; }
-        public List<String> Names { get; set; }
-        public List<String> States { get; set; }
-        public List<String> LastNames { get; set; }
+        public static List<string> Domains { get; set; }
+        public static List<string> Extensions { get; set; }
+        public static List<string> Names { get; set; }
+        public static List<string> States { get; set; }
+        public static List<string> LastNames { get; set; }
 
 
         public GenerateRandom() {
@@ -25,7 +25,7 @@ namespace Test.Test.page.entidades
 
         }
 
-        public string GetRandomFromList(List<String> lista) {
+        public static string GetRandomFromList(List<String> lista) {
             int len = r.Next(lista.Count-1);
             return lista[len];
         }
@@ -51,7 +51,7 @@ namespace Test.Test.page.entidades
             return builder.ToString();
         }
 
-        public String RandomEmail()
+        public static string RandomEmail()
         {
             int n = RandomNumber(0, 9);
             string text = RandomString(8, false);
@@ -61,16 +61,16 @@ namespace Test.Test.page.entidades
                 
         }
 
-        public String RandomPhone(int digits) {
+        public static string RandomPhone(int digits) {
             string s = string.Empty;
             for (int i = 0; i < digits - 1; i++)
             {
-                s = String.Concat(s,r.Next(10).ToString());
+                s = string.Concat(s,r.Next(10).ToString());
             }
             return s;
         }
 
-        public static String RandomPassword() {
+        public static string RandomPassword() {
             StringBuilder builder = new StringBuilder();
             builder.Append(RandomString(4,true));
             builder.Append(RandomNumber(100, 999));
@@ -78,16 +78,16 @@ namespace Test.Test.page.entidades
             return builder.ToString();
         }
 
-        public String RandomName() {
+        public static string RandomName() {
             return GetRandomFromList(Names);
         }
 
-        public String RandomLastName()
+        public static string RandomLastName()
         {
             return GetRandomFromList(LastNames);
         }
 
-        public String RandomState() {
+        public static string RandomState() {
             return GetRandomFromList(States);
         }
     }

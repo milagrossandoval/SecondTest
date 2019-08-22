@@ -11,10 +11,10 @@ namespace Test.Test.driver
 {
     public class Driver
     {
-        public static IWebDriver InicializarDriver(String navegador, bool remoto)
+        public static IWebDriver InitializeDriver(string browser, bool remote)
         {
             IWebDriver webDriver = null;
-            switch (navegador)
+            switch (browser)
             {
                 case "firefox":
                     webDriver = new FirefoxDriver();
@@ -27,7 +27,7 @@ namespace Test.Test.driver
             return webDriver;
         }
 
-        public static void CerrarPagina(IWebDriver webDriver)
+        public static void ClosePage(IWebDriver webDriver)
         {
             if (webDriver != null)
             {
