@@ -26,7 +26,7 @@ namespace Test.Test.page.entidades
         }
 
         public string GetRandomFromList(List<String> lista) {
-            int len = r.Next(lista.Count);
+            int len = r.Next(lista.Count-1);
             return lista[len];
         }
 
