@@ -8,13 +8,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using Test.Test.driver;
 using Test.Test.Entities;
+using Test.Util;
 
 namespace Test.Test.Model
 {
-    public class CreateAccount
+    public class CreateAccountPage
     {
-        private IWebDriver driver = null;
-        private bool b = false;
+        private readonly IWebDriver driver = null;
         private readonly By btnSign = By.LinkText("Sign in");
         private readonly By txtEmail = By.Id("email_create");
         private readonly By btnSubmit = By.Id("SubmitCreate");
@@ -30,10 +30,9 @@ namespace Test.Test.Model
         private readonly By headerName = By.XPath("//*[@id='header']/div[2]/div/div/nav/div[1]/a/span");
         private readonly By btnLogout = By.ClassName("logout");
 
-
-        public CreateAccount(string browser, string url, bool remote)
+        public CreateAccountPage(string browser, string url)
         {
-            driver = Driver.InitializeDriver(browser, remote);
+            driver = Driver.InitializeDriver(browser);
             driver.Url = url;
         }
 
@@ -42,13 +41,11 @@ namespace Test.Test.Model
             driver.FindElement(btnSign).Click();
         }
 
-        public Tuple<string, string, bool> Create(Account account)
+        public void CreateAccount(Account account)
         {
-            var wait = new WebDriverWait(driver,TimeSpan.FromSeconds(60));               
             driver.FindElement(txtEmail).SendKeys(account.Email);
             driver.FindElement(btnSubmit).Click();
-            //Thread.Sleep(2000);
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(txtFirstName));            
+            WaitDriver.WaitForElement(driver,txtFirstName);
             driver.FindElement(txtFirstName).SendKeys(account.FirstName);
             driver.FindElement(txtLastName).SendKeys(account.LastName);
             driver.FindElement(txtPass).SendKeys(account.Password);
@@ -62,22 +59,21 @@ namespace Test.Test.Model
             driver.FindElement(txtPhone).SendKeys(account.Phone);
             driver.FindElement(txtAlias).SendKeys(account.Alias);
             driver.FindElement(btnSubmitAccount).Click();
-            var nameAccount = driver.FindElement(headerName).Text;
-            string urlObtenida = driver.Url;
-            b = validateLogout();
-            return Tuple.Create(nameAccount, urlObtenida, b);
         }
 
-        public bool validateLogout()
+        public Tuple<string, string, bool> validateCreate()
         {
+            bool b = false;
+            string nameAccount = driver.FindElement(headerName).Text;
+            string urlObtenida = driver.Url;
+
             if (driver.FindElement(btnLogout).Displayed)
             {
                b = true;
             }
 
-            return b;
+            return Tuple.Create(nameAccount, urlObtenida, b);
         }
-
 
         public void ClosePage()
         {

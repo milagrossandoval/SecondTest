@@ -72,13 +72,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Implementation\API.cs" />
-    <Compile Include="Implementation\Account.cs" />
+    <Compile Include="Implementation\CreateAccount.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Driver\Driver.cs" />
     <Compile Include="Entities\Account.cs" />
     <Compile Include="Util\GenerateRandom.cs" />
     <Compile Include="Entities\Country.cs" />
-    <Compile Include="Model\CreateAccount.cs" />
+    <Compile Include="Pages\CreateAccountPage.cs" />
+    <Compile Include="Util\WaitDriver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="env\default\default.properties" />

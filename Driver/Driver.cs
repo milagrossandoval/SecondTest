@@ -11,7 +11,7 @@ namespace Test.Test.driver
 {
     public class Driver
     {
-        public static IWebDriver InitializeDriver(string browser, bool remote)
+        public static IWebDriver InitializeDriver(string browser)
         {
             IWebDriver webDriver = null;
             switch (browser)
@@ -21,6 +21,9 @@ namespace Test.Test.driver
                     break;
                 case "chrome":
                     webDriver = new ChromeDriver();
+                    break;
+                default:
+                    Console.WriteLine("The browser is unknown.");
                     break;
             }
             webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);

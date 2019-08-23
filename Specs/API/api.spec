@@ -4,8 +4,6 @@
 
 Get country
 -------
-
-
 * Get country for "US"
 * Validate get country
 

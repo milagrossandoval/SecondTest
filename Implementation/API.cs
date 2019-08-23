@@ -11,7 +11,7 @@ using Test.Test.Entities;
 
 namespace Test
 {
-    public class ApiAutomated
+    public class API
     {
         private IRestResponse response;
 
@@ -30,7 +30,6 @@ namespace Test
         public void ValidateGetCountry()
         {
             Assert.That(response.StatusCode.ToString().Trim(), Is.Not.EqualTo("NotFound"));
-
         }
                               
         [Step("Add country <table>")]
