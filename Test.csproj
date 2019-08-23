@@ -84,6 +84,7 @@
   <ItemGroup>
     <None Include="env\default\default.properties" />
     <None Include="manifest.json" />
+    <None Include="Specs\Account\Hola.spec" />
     <None Include="Specs\API\API.spec" />
     <None Include="Specs\Account\CreateAccount.spec" />
     <None Include="packages.config">

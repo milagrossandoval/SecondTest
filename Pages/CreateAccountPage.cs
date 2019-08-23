@@ -61,20 +61,22 @@ namespace Test.Test.Model
             driver.FindElement(btnSubmitAccount).Click();
         }
 
-        public Tuple<string, string, bool> validateCreate()
+
+        public string GetHeaderdAccount()
         {
-            bool b = false;
-            string nameAccount = driver.FindElement(headerName).Text;
-            string urlObtenida = driver.Url;
-
-            if (driver.FindElement(btnLogout).Displayed)
-            {
-               b = true;
-            }
-
-            return Tuple.Create(nameAccount, urlObtenida, b);
+            return driver.FindElement(headerName).Text;
         }
 
+        public string GetURL()
+        {
+            return driver.Url;
+        }
+
+        public bool GetDisplayButtonLogout()
+        {
+            return driver.FindElement(btnLogout).Displayed;
+        }
+               
         public void ClosePage()
         {
             Driver.ClosePage(driver);

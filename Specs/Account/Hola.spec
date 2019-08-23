@@ -7,9 +7,7 @@ Register an account
 
 * Navigate to "http://automationpractice.com/index.php?"
 * Create a new account
-* Validate registered account
-* Validate expected url
-* Validate button logout 
+* Just registered 
 
 ___
-* Close driver
+* Tear down step 3 

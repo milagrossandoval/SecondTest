@@ -18,6 +18,14 @@ namespace Test
         private CreateAccountPage createAccount;
         private Account account;
 
+
+        [BeforeScenario]
+        public void BeforeScenario(string url)
+        {
+           
+        }
+
+
         [Step("Navigate to <url>")]
         public void NavigateTo(string url)
         {
@@ -44,24 +52,34 @@ namespace Test
             createAccount.CreateAccount(account);
         }
 
-        [Step("Just registered")]
+        [Step("Validate registered account")]
         public void ValidateAccountCreated()
         {
-            var result = createAccount.validateCreate();
-            string name = result.Item1;
-            string obtainURL = result.Item2;
-            string expectedURL = "?controller=my-account";
-            bool boolLogOut = result.Item3;
-            Assert.AreEqual(account.FirstName + " " + account.LastName, name);
-            Assert.IsTrue(obtainURL.Contains(expectedURL));
-            Assert.IsTrue(boolLogOut);
-            createAccount.ClosePage();
+            //string nombre = $"{account.FirstName} {account.LastName}";
+            //string nombre = string.Format("{account.FirstName} {account.LastName}");
+            //string nombre = $"{account.FirstName} {account.LastName}";
+
+            Assert.AreEqual(account.FirstName + " " + account.LastName, createAccount.GetHeaderdAccount());
+
         }
 
-        //[AfterScenario]
-        //public void AfterScenario()
-        //{
-        //    createAccount.ClosePage();
-        //}
+        [Step("Validate expected url")]
+        public void ValidateExpectedURL()
+        {
+            string expectedURL = "?controller=my-account";
+            Assert.IsTrue(createAccount.GetURL().Contains(expectedURL));
+        }
+
+        [Step("Validate button logout")]
+        public void ValidateButtonLogout()
+        {
+            Assert.IsTrue(createAccount.GetDisplayButtonLogout());
+        }
+
+        [Step("Close driver")]
+        public void AfterScenario()
+        {
+            createAccount.ClosePage();
+        }
     }
 }
