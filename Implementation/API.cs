@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Gauge.CSharp.Lib;
 using Gauge.CSharp.Lib.Attribute;
 using NUnit.Framework;
 using RestSharp;
-using Test.Test.Entities;
+using Entities;
+using System.Net;
 
-namespace Test
+namespace Implementation
 {
     public class API
     {
@@ -19,27 +17,27 @@ namespace Test
         public void GetCountry(string code)
         {
             var client = new RestClient();
-            var request = new RestRequest("https://restcountries.eu/rest/v2/alpha/{code}", Method.GET);
+            var request = new RestRequest(Environment.GetEnvironmentVariable("urlGetCountry"), Method.GET);
             request.AddUrlSegment("code", code);
             response = client.Execute(request);
-            Console.WriteLine(response.StatusCode.ToString().Trim());
+            Console.WriteLine(response.StatusCode);
             Console.WriteLine(response.Content);
         }
 
         [Step("Validate get country")]
         public void ValidateGetCountry()
         {
-            Assert.That(response.StatusCode.ToString().Trim(), Is.Not.EqualTo("NotFound"));
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.OK);
         }
-                              
+
         [Step("Add country <table>")]
         public void AddCountry(Table table)
         {
-            var tableRows = table.GetTableRows();
+            List<TableRow> tableRows = table.GetTableRows();
             var client = new RestClient();
-            var request = new RestRequest("https://restcountries.eu/rest/v2/alpha/add",Method.POST);
+            var request = new RestRequest(Environment.GetEnvironmentVariable("urlAddCountry"),Method.POST);
 
-            foreach (var row in tableRows)
+            foreach (TableRow row in tableRows)
             {
                 request.AddJsonBody(new Country {
                 name = row.GetCell("name"),
@@ -53,7 +51,7 @@ namespace Test
         [Step("Validate add country")]
         public void ValidateAddCountry()
         {
-            Assert.That(response.StatusCode.ToString().Trim(), Is.EqualTo("NotFound"));
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.MethodNotAllowed);
         }
     }
 }

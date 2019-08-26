@@ -1,35 +1,30 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using FluentAssertions;
-using Gauge.CSharp.Lib;
 using Gauge.CSharp.Lib.Attribute;
 using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using Test.Test.Entities;
-using Test.Test.Model;
-using Test.Test.Util;
+using Entities;
+using Pages;
+using Util;
 
-namespace Test
+namespace Implementation
 {
     public class CreateAccount
     {
-        private CreateAccountPage createAccount;
+        private readonly CreateAccountPage createAccount = new CreateAccountPage();
         private Account account;
 
 
-        [BeforeScenario]
-        public void BeforeScenario(string url)
+        [BeforeSuite]
+        public void BeforeSuite()
         {
-           
+            string browser = Environment.GetEnvironmentVariable("browser");
+            createAccount.InitializeDriver(browser);
         }
-
 
         [Step("Navigate to <url>")]
         public void NavigateTo(string url)
         {
-            createAccount = new CreateAccountPage("chrome", url);
+            url = Environment.GetEnvironmentVariable("urlAutomation");
+            createAccount.NavigateTo(url);
         }
 
         [Step("Create a new account")]
@@ -57,9 +52,10 @@ namespace Test
         {
             //string nombre = $"{account.FirstName} {account.LastName}";
             //string nombre = string.Format("{account.FirstName} {account.LastName}");
-            //string nombre = $"{account.FirstName} {account.LastName}";
-
+            //var nombre = $"{account.FirstName} {account.LastName}";
+            //string test = $"hi";
             Assert.AreEqual(account.FirstName + " " + account.LastName, createAccount.GetHeaderdAccount());
+            //Assert.AreEqual(nombre, createAccount.GetHeaderdAccount());
 
         }
 

@@ -1,20 +1,14 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Test.Test.driver;
-using Test.Test.Entities;
-using Test.Util;
+using Entities;
+using Util;
+using DriverImpl;
 
-namespace Test.Test.Model
+namespace Pages
 {
     public class CreateAccountPage
     {
-        private readonly IWebDriver driver = null;
+        private IWebDriver driver = null;
         private readonly By btnSign = By.LinkText("Sign in");
         private readonly By txtEmail = By.Id("email_create");
         private readonly By btnSubmit = By.Id("SubmitCreate");
@@ -30,10 +24,14 @@ namespace Test.Test.Model
         private readonly By headerName = By.XPath("//*[@id='header']/div[2]/div/div/nav/div[1]/a/span");
         private readonly By btnLogout = By.ClassName("logout");
 
-        public CreateAccountPage(string browser, string url)
+        public void InitializeDriver(string browser)
         {
             driver = Driver.InitializeDriver(browser);
-            driver.Url = url;
+        }
+
+        public void NavigateTo(string url)
+        {
+           driver.Navigate().GoToUrl(url);
         }
 
         public void SignIn()
@@ -60,7 +58,6 @@ namespace Test.Test.Model
             driver.FindElement(txtAlias).SendKeys(account.Alias);
             driver.FindElement(btnSubmitAccount).Click();
         }
-
 
         public string GetHeaderdAccount()
         {

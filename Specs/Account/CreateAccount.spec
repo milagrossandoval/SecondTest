@@ -5,7 +5,7 @@ Spec
 Register an account
 -------
 
-* Navigate to "http://automationpractice.com/index.php?"
+* Navigate to "urlAutomation"
 * Create a new account
 * Validate registered account
 * Validate expected url
