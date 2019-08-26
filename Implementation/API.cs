@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using Gauge.CSharp.Lib;
 using Gauge.CSharp.Lib.Attribute;
-using NUnit.Framework;
 using RestSharp;
 using Entities;
 using System.Net;
+using FluentAssertions;
 
 namespace Implementation
 {
@@ -27,7 +27,8 @@ namespace Implementation
         [Step("Validate get country")]
         public void ValidateGetCountry()
         {
-            Assert.AreEqual(response.StatusCode, HttpStatusCode.OK);
+            var obtainResponse = response.StatusCode;
+            obtainResponse.Should().Be(HttpStatusCode.OK);
         }
 
         [Step("Add country <table>")]
@@ -51,7 +52,8 @@ namespace Implementation
         [Step("Validate add country")]
         public void ValidateAddCountry()
         {
-            Assert.AreEqual(response.StatusCode, HttpStatusCode.MethodNotAllowed);
+            var obtainResponse = response.StatusCode;
+            obtainResponse.Should().Be(HttpStatusCode.MethodNotAllowed);
         }
     }
 }
